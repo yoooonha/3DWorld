@@ -34,7 +34,7 @@ public class CameraMove : MonoBehaviour
         rotX = transform.localRotation.eulerAngles.x;
         rotY = transform.localRotation.eulerAngles.y;
 
-        dirNormal = _realCam.localPosition.normalized; //부모로부터 (내가)어느방향으로 떨어져있다.
+        dirNormal = _realCam.localPosition.normalized; //부모로부터 (내가)어느방향으로 떨어져있다. 
         //마우스커서 GameScene에서 안보이게함
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -62,6 +62,7 @@ public class CameraMove : MonoBehaviour
         finalDir = transform.TransformPoint(dirNormal * maxDistance);
 
         RaycastHit hit;
+        //Debug.DrawLine(transform.position, finalDir, Color.green, 5);
         if (Physics.Linecast(transform.position, finalDir, out hit))//hit안에 값(transform.position,finalDir)을 넣어준다
         {
             finalDis = Mathf.Clamp(hit.distance, minDistance, maxDistance);
