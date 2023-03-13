@@ -6,8 +6,13 @@ public class CharactorMove : MonoBehaviour
 {
 
     [SerializeField] Transform _cam;
+    [SerializeField] Collider _sword;
+    [SerializeField] GameObject _gameOver;
     Animator _ani;
     float _moveValue = 0;
+
+    int HP = 10;
+    int _coin = 0;
     void Start()
     {
         _ani = GetComponent<Animator>();   
@@ -19,15 +24,49 @@ public class CharactorMove : MonoBehaviour
 
       
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
+            _sword.enabled= true;
             _ani.SetTrigger("Attack");
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _ani.SetTrigger("Jump");
         }
 
+    }
+    bool CanHitted = true;
+
+   
+    public void Hitted()
+    {
+        if (CanHitted== false) return;
+        HP--;
+        if (HP < 0)
+        {
+            _gameOver.SetActive(true);
+            Time.timeScale= 0;
+            //gameover
+
+        }
+        else
+        {
+            _ani.SetTrigger("Hitted");
+            //hitted
+        }
+        CanHitted= false;
+        StartCoroutine(CoHittedCoolTime());
+
+    }
+    IEnumerator CoHittedCoolTime()
+    {
+        yield return new WaitForSeconds(1f);
+        CanHitted = true;
+    }
+
+    void EndAttack()
+    {
+        _sword.enabled= false;
     }
 
 
@@ -62,4 +101,11 @@ public class CharactorMove : MonoBehaviour
         //}
 
     }
+    public void AddCoin()
+    {
+        _coin++;
+        //uiÇ¥Çö
+    }
+
+    
 }

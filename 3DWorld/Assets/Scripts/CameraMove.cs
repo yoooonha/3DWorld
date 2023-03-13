@@ -36,8 +36,8 @@ public class CameraMove : MonoBehaviour
 
         dirNormal = _realCam.localPosition.normalized; //부모로부터 (내가)어느방향으로 떨어져있다. 
         //마우스커서 GameScene에서 안보이게함
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     void Update()
