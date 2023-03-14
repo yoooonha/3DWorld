@@ -8,10 +8,11 @@ public class CharactorMove : MonoBehaviour
     [SerializeField] Transform _cam;
     [SerializeField] Collider _sword;
     [SerializeField] GameObject _gameOver;
+    [SerializeField] Inventory _inven;
     Animator _ani;
     float _moveValue = 0;
 
-    int HP = 10;
+    int HP = 20;
     int _coin = 0;
     void Start()
     {
@@ -103,8 +104,14 @@ public class CharactorMove : MonoBehaviour
     }
     public void AddCoin()
     {
-        _coin++;
-        //uiÇ¥Çö
+        Item item = new Item();
+        int count = Random.Range(1, 100);
+       EItemType eType = (EItemType)Random.Range(1, (int)EItemType.Max-1);
+        item._eType= eType;
+        item._Count= count;
+        _inven.AddItem(item);
+        
+        
     }
 
     

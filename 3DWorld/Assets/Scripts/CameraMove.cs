@@ -27,6 +27,7 @@ public class CameraMove : MonoBehaviour
 
     [SerializeField] float smoothness = 3;
 
+    bool _isMoveVisible;
 
 
     void Start()
@@ -35,13 +36,28 @@ public class CameraMove : MonoBehaviour
         rotY = transform.localRotation.eulerAngles.y;
 
         dirNormal = _realCam.localPosition.normalized; //부모로부터 (내가)어느방향으로 떨어져있다. 
-        //마우스커서 GameScene에서 안보이게함
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+       
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            //마우스커서 GameScene에서 안보이게함
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            _isMoveVisible = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+          
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            _isMoveVisible= true;
+        }
+
+        if (_isMoveVisible) return;
         rotX += Input.GetAxis("Mouse Y") * -1 * sensitivity * Time.deltaTime;
         rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
@@ -50,6 +66,7 @@ public class CameraMove : MonoBehaviour
         Quaternion rot = Quaternion.Euler(rotX, rotY, 0); //transform.rotation = Quaternion 쓰는 방법만(rotation에서 사용한다)
         transform.rotation = rot;
         //transform.position= _follwer.position;
+
 
 
     }
