@@ -21,13 +21,12 @@ public class Inventory : MonoBehaviour
     {
         foreach(Sprite sp in _coins)
         {
+            if (_item._eType.ToString().Equals(sp.name))
+            {
+                _item._sprite = sp;
+            }
+        }
 
-        if (_item._eType.ToString().Equals(sp.name))
-        {
-            _item._sprite = sp;
-        }
-        }
-        
         //    foreach(EItemType type in Enum.GetValues(typeof(EItemType)))
         //    {
         //        if (type.ToString().Equals(sp.name))
@@ -36,9 +35,9 @@ public class Inventory : MonoBehaviour
         //        }
         //    }
         //}
-        //IsItems.Add(_item);
-        //GameObject temp = Instantiate(_itemPreb, _content);
-        //temp.GetComponent<ItemUI>().Init(_item);
+        IsItems.Add(_item);
+        GameObject temp = Instantiate(_itemPreb, _content);
+        temp.GetComponent<ItemUI>().Init(_item);
     }
 }
 
